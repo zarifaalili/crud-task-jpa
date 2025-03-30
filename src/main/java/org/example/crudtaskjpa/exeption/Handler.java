@@ -11,6 +11,10 @@ public class Handler {
 
     @ExceptionHandler(AlreadyExeption.class)
     public ResponseEntity<Response> handle(AlreadyExeption exeption){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(exeption.getMessage(),"fin code unique olmalidir"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(exeption.getMessage(),"insert olunmadi"));
+    }
+    @ExceptionHandler(NotFoundExeption.class)
+    public ResponseEntity<Response> handle2(NotFoundExeption exeption){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Response(exeption.getMessage(),"employee tapilmadi"));
     }
 }

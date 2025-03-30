@@ -37,6 +37,14 @@ public class EmployeeController {
       return employee;
     }
 
+    @GetMapping("/byFin/{fin}")
+    public EmployeeDto getEmployeeByFin(@PathVariable Integer fin){
+      EmployeeDto employee=employeeService.findByFin(fin);
+      return employee;
+    }
+
+
+
     @DeleteMapping("/{id}")
     public void deleteEmployeeById(@PathVariable Integer id){
       employeeService.deleteEmployeeById(id);
@@ -89,4 +97,6 @@ public class EmployeeController {
 
         return EmployeeMapper.mapToDto(updatedEmployee);
     }
+
+
 }

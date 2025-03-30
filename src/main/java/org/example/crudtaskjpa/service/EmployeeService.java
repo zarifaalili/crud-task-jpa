@@ -3,6 +3,7 @@ package org.example.crudtaskjpa.service;
 import org.example.crudtaskjpa.dao.entity.EmployeeEntity;
 import org.example.crudtaskjpa.dao.entity.repository.EmployeeRepository;
 import org.example.crudtaskjpa.exeption.AlreadyExeption;
+import org.example.crudtaskjpa.exeption.NotFoundExeption;
 import org.example.crudtaskjpa.mapper.EmployeeMapper;
 import org.example.crudtaskjpa.model.dto.EmployeeDto;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,15 @@ public class EmployeeService {
 
   public  void deleteEmployeeById(Integer id){
       employeeRepository.deleteById(id);
+  }
+
+  public EmployeeDto findByFin(Integer fin){
+
+        EmployeeEntity employeeEntity=employeeRepository.findEmployeeByFin(fin);
+      if (employeeEntity == null) {
+          throw new NotFoundExeption(fin+" kodlu employee movcud deyil");
+      }
+        return EmployeeMapper.mapToDto(employeeEntity);
+
   }
 }
