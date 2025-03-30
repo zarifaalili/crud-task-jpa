@@ -7,8 +7,10 @@ public class EmployeeMapper {
 
     public static EmployeeEntity mapToEntity(EmployeeDto dto) {
         EmployeeEntity entity = new EmployeeEntity();
+        entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
+        entity.setFin(dto.getFin());
         entity.setAge(dto.getAge());
         entity.setBirthday(dto.getBirthday());
         entity.setPhone(dto.getPhone());
@@ -17,7 +19,9 @@ public class EmployeeMapper {
     }
     public static EmployeeDto mapToDto(EmployeeEntity entity) {
         EmployeeDto dto = new EmployeeDto();
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setFin(entity.getFin());
         dto.setSurname(entity.getSurname());
         dto.setAge(entity.getAge());
         dto.setBirthday(entity.getBirthday());

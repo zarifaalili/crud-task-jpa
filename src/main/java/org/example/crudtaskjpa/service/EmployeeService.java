@@ -12,8 +12,12 @@ import java.util.List;
 public class EmployeeService {
 
     EmployeeRepository employeeRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
-  public void create(EmployeeDto employeeDto){
+
+    public void create(EmployeeDto employeeDto){
       EmployeeEntity employeeEntity= EmployeeMapper.mapToEntity(employeeDto);
       employeeRepository.save(employeeEntity);
   }
