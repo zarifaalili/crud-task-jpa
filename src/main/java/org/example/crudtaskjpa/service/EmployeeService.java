@@ -2,6 +2,7 @@ package org.example.crudtaskjpa.service;
 
 import org.example.crudtaskjpa.dao.entity.EmployeeEntity;
 import org.example.crudtaskjpa.dao.entity.repository.EmployeeRepository;
+import org.example.crudtaskjpa.exeption.AlreadyExeption;
 import org.example.crudtaskjpa.mapper.EmployeeMapper;
 import org.example.crudtaskjpa.model.dto.EmployeeDto;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,13 @@ public class EmployeeService {
 
     public void create(EmployeeDto employeeDto){
       EmployeeEntity employeeEntity= EmployeeMapper.mapToEntity(employeeDto);
-      employeeRepository.save(employeeEntity);
+      if(employeeRepository.existsByFin(employeeEntity.getFin())){
+          throw new AlreadyExeption("fin unique olmalidir");
+
+        }
+          employeeRepository.save(employeeEntity);
+
+
   }
 
   public EmployeeDto getEmployeeById(Integer id){

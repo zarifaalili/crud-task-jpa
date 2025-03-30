@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeController {
     @Autowired
-  private EmployeeService employeeService;
+    private EmployeeService employeeService;
     private final EmployeeRepository employeeRepository;
 
 
