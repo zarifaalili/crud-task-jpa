@@ -1,8 +1,6 @@
-package org.example.crudtaskjpa.dao.entity.repository;
+package org.example.crudtaskjpa.dao.repository;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.example.crudtaskjpa.dao.entity.EmployeeEntity;
-import org.example.crudtaskjpa.model.dto.EmployeeDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

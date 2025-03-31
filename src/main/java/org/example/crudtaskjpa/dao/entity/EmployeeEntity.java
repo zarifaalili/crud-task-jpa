@@ -1,12 +1,8 @@
 package org.example.crudtaskjpa.dao.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Entity
 @Table(name = "employee")
@@ -14,7 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @NoArgsConstructor
 @Setter
 @Getter
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class EmployeeEntity {
 
     @Id

@@ -1,7 +1,7 @@
 package org.example.crudtaskjpa.mapper;
 
 import org.example.crudtaskjpa.dao.entity.EmployeeEntity;
-import org.example.crudtaskjpa.model.dto.EmployeeDto;
+import org.example.crudtaskjpa.model.EmployeeDto;
 
 public class EmployeeMapper {
 
@@ -15,6 +15,7 @@ public class EmployeeMapper {
         entity.setBirthday(dto.getBirthday());
         entity.setPhone(dto.getPhone());
         entity.setEmail(dto.getEmail());
+
         return entity;
     }
     public static EmployeeDto mapToDto(EmployeeEntity entity) {
