@@ -1,22 +1,25 @@
 package org.example.crudtaskjpa.service;
-
+import lombok.RequiredArgsConstructor;
 import org.example.crudtaskjpa.dao.entity.EmployeeEntity;
 import org.example.crudtaskjpa.dao.repository.EmployeeRepository;
 import org.example.crudtaskjpa.exeption.AlreadyExeption;
 import org.example.crudtaskjpa.exeption.NotFoundExeption;
 import org.example.crudtaskjpa.mapper.EmployeeMapper;
 import org.example.crudtaskjpa.model.EmployeeDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
+//@RequiredArgsConstructor
 public class EmployeeService {
+//    @Autowired
     EmployeeRepository employeeRepository;
+//    private final EmployeeMapper employeeMapper;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+//    public EmployeeService(EmployeeRepository employeeRepository) {
+//        this.employeeRepository = employeeRepository;
+//    }
     public EmployeeDto updateEmployee(Integer id, EmployeeDto employeeDto) {
         EmployeeEntity employee = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
         employee.setName(employeeDto.getName());
@@ -27,7 +30,7 @@ public class EmployeeService {
         employee.setPhone(employeeDto.getPhone());
         employee.setEmail(employeeDto.getEmail());
         EmployeeEntity updatedEmployee = employeeRepository.save(employee);
-        return EmployeeMapper.mapToDto(updatedEmployee);
+        return EmployeeMapper.INSTANCE.mapToDto(updatedEmployee);
     }
     public EmployeeDto updatePartialEmployee(Integer id, EmployeeDto employeeDto) {
         EmployeeEntity employee = employeeRepository.findById(id)
@@ -54,10 +57,10 @@ public class EmployeeService {
             employee.setEmail(employeeDto.getEmail());
         }
         EmployeeEntity updatedEmployee = employeeRepository.save(employee);
-        return EmployeeMapper.mapToDto(updatedEmployee);
+        return EmployeeMapper.INSTANCE.mapToDto(updatedEmployee);
     }
     public void create(EmployeeDto employeeDto) {
-        EmployeeEntity employeeEntity = EmployeeMapper.mapToEntity(employeeDto);
+        EmployeeEntity employeeEntity = EmployeeMapper.INSTANCE.mapToEntity(employeeDto);
         if (employeeRepository.existsByFin(employeeEntity.getFin())) {
             throw new AlreadyExeption("fin unique olmalidir");
         }
@@ -65,11 +68,11 @@ public class EmployeeService {
     }
     public EmployeeDto getEmployeeById(Integer id) {
         var employeeEntity = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
-        return EmployeeMapper.mapToDto(employeeEntity);
+        return EmployeeMapper.INSTANCE.mapToDto(employeeEntity);
 
     }
     public List<EmployeeDto> getAllEmployee() {
-        return employeeRepository.findAll().stream().map(EmployeeMapper::mapToDto).toList();
+        return employeeRepository.findAll().stream().map(EmployeeMapper.INSTANCE::mapToDto).toList();
     }
 
     public void deleteEmployeeById(Integer id) {
@@ -80,6 +83,6 @@ public class EmployeeService {
         if (employeeEntity == null) {
             throw new NotFoundExeption(fin + " kodlu employee movcud deyil");
         }
-        return EmployeeMapper.mapToDto(employeeEntity);
+        return EmployeeMapper.INSTANCE.mapToDto(employeeEntity);
     }
 }

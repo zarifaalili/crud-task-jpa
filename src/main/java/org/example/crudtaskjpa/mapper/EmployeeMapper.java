@@ -2,33 +2,16 @@ package org.example.crudtaskjpa.mapper;
 
 import org.example.crudtaskjpa.dao.entity.EmployeeEntity;
 import org.example.crudtaskjpa.model.EmployeeDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public class EmployeeMapper {
+@Mapper
+public interface EmployeeMapper {
+    EmployeeMapper INSTANCE = Mappers.getMapper(EmployeeMapper.class);
 
-    public static EmployeeEntity mapToEntity(EmployeeDto dto) {
-        EmployeeEntity entity = new EmployeeEntity();
-        entity.setId(dto.getId());
-        entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
-        entity.setFin(dto.getFin());
-        entity.setAge(dto.getAge());
-        entity.setBirthday(dto.getBirthday());
-        entity.setPhone(dto.getPhone());
-        entity.setEmail(dto.getEmail());
+    EmployeeDto mapToDto(EmployeeEntity employeeEntity);
 
-        return entity;
-    }
-    public static EmployeeDto mapToDto(EmployeeEntity entity) {
-        EmployeeDto dto = new EmployeeDto();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setFin(entity.getFin());
-        dto.setSurname(entity.getSurname());
-        dto.setAge(entity.getAge());
-        dto.setBirthday(entity.getBirthday());
-        dto.setPhone(entity.getPhone());
-        dto.setEmail(entity.getEmail());
-        return dto;
-    }
+    EmployeeEntity mapToEntity(EmployeeDto employeeDto);
+
 
 }
